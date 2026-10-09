@@ -1,0 +1,7 @@
+package lifequest.auth;
+import lifequest.Main;import lifequest.database.UserDAO;import lifequest.ui.Style;import javax.swing.*;import java.awt.*;
+public class RegisterPanel extends JPanel {
+ private final Main main;private final JTextField username=new JTextField(),email=new JTextField();private final JPasswordField password=new JPasswordField();
+ public RegisterPanel(Main m){main=m;setBackground(Style.BACKGROUND);setLayout(new GridBagLayout());JPanel c=Style.card();c.setLayout(new GridLayout(0,1,8,8));c.setBorder(BorderFactory.createEmptyBorder(25,35,25,35));c.add(Style.title("Create Account"));c.add(Style.label("Username"));Style.text(username);c.add(username);c.add(Style.label("Email"));Style.text(email);c.add(email);c.add(Style.label("Password"));c.add(password);JButton create=Style.button("Register"),back=new JButton("Back to Login");c.add(create);c.add(back);create.addActionListener(e->register());back.addActionListener(e->main.showLogin());add(c);}
+ private void register(){String u=username.getText().trim(),e=email.getText().trim(),p=new String(password.getPassword());if(u.isEmpty()||e.isEmpty()||p.isEmpty()){JOptionPane.showMessageDialog(this,"Fill all fields.");return;}if(!e.contains("@")||p.length()<4){JOptionPane.showMessageDialog(this,"Enter a valid email and a password of at least 4 characters.");return;}if(new UserDAO().register(u,e,p)){JOptionPane.showMessageDialog(this,"Registration successful.");main.showLogin();}else JOptionPane.showMessageDialog(this,"Registration failed. Username/email may already exist.");}
+}

@@ -1,0 +1,5 @@
+package lifequest.profile;
+import lifequest.model.User;import lifequest.ui.Style;import javax.swing.*;import java.awt.*;
+public class ProfilePanel extends JPanel {
+ public ProfilePanel(User u){setBackground(Style.BACKGROUND);setLayout(new BorderLayout(15,15));setBorder(BorderFactory.createEmptyBorder(25,25,25,25));add(Style.title("Profile"),BorderLayout.NORTH);JPanel p=Style.card();p.setLayout(new BoxLayout(p,BoxLayout.Y_AXIS));p.add(Style.title(u.getUsername()));p.add(Style.label("Adventurer"));p.add(Style.label("Level: "+u.getLevel()));p.add(Style.label("XP: "+u.getXp()));p.add(Style.label("Coins: "+u.getCoins()));p.add(Style.label("Health: "+u.getHealth()));p.add(Style.label("Focus: "+u.getFocus()));p.add(Style.label("Discipline: "+u.getDiscipline()));p.add(Style.label("Strength: "+u.getStrength()));p.add(Style.label("Achievements"));p.add(Style.label("• First Quest"));if(u.getXp()>=100)p.add(Style.label("• Knowledge Seeker"));if(u.getXp()>=500)p.add(Style.label("• Quest Master"));add(p,BorderLayout.CENTER);}
+}

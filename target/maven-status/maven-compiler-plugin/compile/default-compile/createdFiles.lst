@@ -1,0 +1,17 @@
+lifequest\model\User.class
+lifequest\profile\ProfilePanel.class
+lifequest\auth\RegisterPanel.class
+lifequest\settings\SettingsPanel.class
+lifequest\analytics\AnalyticsPanel.class
+lifequest\dashboard\DashboardPanel.class
+lifequest\database\UserDAO.class
+lifequest\database\QuestDAO$Quest.class
+lifequest\Main.class
+lifequest\history\HistoryPanel.class
+lifequest\database\QuestDAO.class
+lifequest\quests\QuestPanel.class
+lifequest\ui\Style.class
+lifequest\quests\CreateQuestDialog.class
+lifequest\auth\LoginPanel.class
+lifequest\quests\QuestPanel$1.class
+lifequest\database\DB.class

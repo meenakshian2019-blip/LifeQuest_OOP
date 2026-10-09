@@ -1,0 +1,9 @@
+package lifequest.quests;
+import lifequest.database.QuestDAO;import lifequest.model.User;import lifequest.ui.Style;import javax.swing.*;import java.awt.*;
+public class CreateQuestDialog extends JDialog {
+ private boolean saved;private final JTextField name=new JTextField();private final JComboBox<String> cat=new JComboBox<>(new String[]{"Study","Fitness","Personal","Work","Other"}),pri=new JComboBox<>(new String[]{"Low","Medium","High"}),diff=new JComboBox<>(new String[]{"Easy","Medium","Hard","Epic"}),rep=new JComboBox<>(new String[]{"None","Daily","Weekly"});
+ public CreateQuestDialog(Window owner,User u){super(owner,"Create Quest",ModalityType.APPLICATION_MODAL);setSize(430,430);setLocationRelativeTo(owner);JPanel p=new JPanel(new GridLayout(0,2,10,10));p.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));row(p,"Quest name",name);row(p,"Category",cat);row(p,"Priority",pri);row(p,"Difficulty",diff);row(p,"Repeat",rep);JButton save=Style.button("Create Quest"),cancel=new JButton("Cancel");p.add(save);p.add(cancel);save.addActionListener(e->save(u));cancel.addActionListener(e->dispose());add(p);}
+ private void row(JPanel p,String s,JComponent c){p.add(Style.label(s));if(c instanceof JTextField)Style.text((JTextField)c);else Style.combo((JComboBox<?>)c);p.add(c);}
+ private void save(User u){String n=name.getText().trim();if(n.isEmpty()){JOptionPane.showMessageDialog(this,"Enter a quest name.");return;}String d=(String)diff.getSelectedItem();int xp=d.equals("Easy")?20:d.equals("Medium")?50:d.equals("Hard")?80:120;if(new QuestDAO().addQuest(u.getId(),n,(String)cat.getSelectedItem(),(String)pri.getSelectedItem(),d,xp,(String)rep.getSelectedItem())){saved=true;dispose();}else JOptionPane.showMessageDialog(this,"Could not create quest.");}
+ public boolean isSaved(){return saved;}
+}
