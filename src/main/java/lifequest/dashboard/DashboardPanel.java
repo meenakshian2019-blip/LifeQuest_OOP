@@ -17,6 +17,7 @@ import java.awt.*;
 public class DashboardPanel extends JPanel {
     private final Main main;
     private final User user;
+    private JButton selectedButton;
     private final JPanel content = new JPanel(new BorderLayout());
 
     public DashboardPanel(Main m, User u) {
@@ -52,7 +53,7 @@ public class DashboardPanel extends JPanel {
         nav(s, "♙   Profile", e -> show(new ProfilePanel(user)), false);
         nav(s, "⚙   Settings", e -> show(new SettingsPanel(main, user)), false);
         s.add(Box.createVerticalGlue());
-        JLabel quote = Style.label("“Progress, not\nperfection.”");
+        JLabel quote = Style.label("“Progress, not\n perfection.”");
         quote.setForeground(Style.MUTED);
         quote.setFont(new Font("Segoe UI", Font.ITALIC, 12));
         quote.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -62,7 +63,7 @@ public class DashboardPanel extends JPanel {
         return s;
     }
 
-    private void nav(JPanel s, String text, java.awt.event.ActionListener action, boolean selected) {
+    /*private void nav(JPanel s, String text, java.awt.event.ActionListener action, boolean selected) {
         JButton b = new JButton(text);
         b.setAlignmentX(Component.LEFT_ALIGNMENT);
         b.setMaximumSize(new Dimension(185, 42));
@@ -77,7 +78,57 @@ public class DashboardPanel extends JPanel {
         b.addActionListener(action);
         s.add(b);
         s.add(Box.createVerticalStrut(7));
+    } */
+
+
+    private void nav(JPanel s, String text,
+                 java.awt.event.ActionListener action,
+                 boolean selected) {
+
+    JButton b = new JButton(text);
+
+    b.setAlignmentX(Component.LEFT_ALIGNMENT);
+    b.setMaximumSize(new Dimension(185, 42));
+    b.setPreferredSize(new Dimension(180, 42));
+    b.setHorizontalAlignment(SwingConstants.LEFT);
+    b.setFont(new Font("Segoe UI", Font.BOLD, 13));
+    b.setFocusPainted(false);
+    b.setBorder(new EmptyBorder(10, 12, 10, 8));
+
+    if (selected) {
+        selectedButton = b;
     }
+
+    updateNavColor(b, selected);
+
+    b.addActionListener(e -> {
+        if (selectedButton != null) {
+            updateNavColor(selectedButton, false);
+        }
+
+        selectedButton = b;
+        updateNavColor(b, true);
+
+        action.actionPerformed(e);
+    });
+
+    s.add(b);
+    s.add(Box.createVerticalStrut(7));
+}
+
+    private void updateNavColor(JButton b, boolean selected) {
+    b.setOpaque(true);
+    b.setContentAreaFilled(true);
+    b.setBorderPainted(false);
+
+    if (selected) {
+        b.setForeground(Color.WHITE);
+        b.setBackground(Style.ACCENT);
+    } else {
+        b.setForeground(Style.MUTED);
+        b.setBackground(Style.SIDEBAR);
+    }
+}
 
     private void show(JPanel panel) {
         content.removeAll(); content.add(panel, BorderLayout.CENTER);
@@ -127,7 +178,14 @@ public class DashboardPanel extends JPanel {
         JLabel buddy = Style.label("Your little quest companion"); buddy.setForeground(Style.MUTED); buddy.setAlignmentX(Component.LEFT_ALIGNMENT);
         JTextArea message = new JTextArea("Every small step counts.\nPick a quest, do your best,\nand let's level up together!");
         message.setEditable(false); message.setFocusable(false); message.setOpaque(false); message.setForeground(Style.TEXT); message.setFont(new Font("Segoe UI", Font.PLAIN, 13)); message.setLineWrap(true); message.setWrapStyleWord(true);
-        JButton quests = Style.button("✧  View your quests"); quests.setAlignmentX(Component.LEFT_ALIGNMENT); quests.addActionListener(e -> show(new QuestPanel(main, user)));
+        //JButton quests = Style.button("✧  View your quests"); quests.setAlignmentX(Component.LEFT_ALIGNMENT); quests.addActionListener(e -> show(new QuestPanel(main, user)));
+        JButton quests = Style.button("✧  View your quests");
+quests.setAlignmentX(Component.LEFT_ALIGNMENT);
+quests.setForeground(Color.BLACK);
+quests.setBackground(Style.ACCENT);
+quests.setOpaque(true);
+quests.setContentAreaFilled(true);
+quests.addActionListener(e -> show(new QuestPanel(main, user)));
         mascotText.add(meet); mascotText.add(Box.createVerticalStrut(5)); mascotText.add(buddy); mascotText.add(Box.createVerticalStrut(13)); mascotText.add(message); mascotText.add(Box.createVerticalStrut(15)); mascotText.add(quests);
         companion.add(new MascotPanel(), BorderLayout.CENTER); companion.add(mascotText, BorderLayout.SOUTH);
         lower.add(progress); lower.add(companion);

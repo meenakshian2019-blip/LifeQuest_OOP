@@ -66,9 +66,11 @@ public class Style {
     public static JButton button(String s) {
         JButton b = new JButton(s);
         b.setFocusPainted(false);
-        b.setForeground(Color.WHITE);
+        b.setForeground(Color.BLACK);
         b.setBackground(ACCENT);
         b.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        b.setOpaque(true);
+b.setContentAreaFilled(true);
         b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         b.setBorder(new CompoundBorder(
             new LineBorder(ACCENT, 1, true),
@@ -80,7 +82,7 @@ public class Style {
     public static JButton secondaryButton(String s) {
         JButton b = new JButton(s);
         b.setFocusPainted(false);
-        b.setForeground(TEXT);
+        b.setForeground(Color.BLACK);
         b.setBackground(CARD);
         b.setFont(new Font("Segoe UI", Font.BOLD, 13));
         b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
