@@ -8,10 +8,13 @@ lifequest\database\UserDAO.class
 lifequest\database\QuestDAO$Quest.class
 lifequest\Main.class
 lifequest\history\HistoryPanel.class
+lifequest\quests\QuestPanel$2.class
 lifequest\database\QuestDAO.class
 lifequest\quests\QuestPanel.class
 lifequest\ui\Style.class
+lifequest\history\HistoryPanel$1.class
 lifequest\quests\CreateQuestDialog.class
 lifequest\auth\LoginPanel.class
+lifequest\ui\MascotPanel.class
 lifequest\quests\QuestPanel$1.class
 lifequest\database\DB.class
