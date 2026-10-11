@@ -114,11 +114,43 @@ b.setContentAreaFilled(true);
         ));
     }
 
-    public static void combo(JComboBox<?> c) {
+    /*public static void combo(JComboBox<?> c) {
         c.setBackground(CARD);
         c.setForeground(TEXT);
         c.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-    }
+    }*/
+
+
+    
+public static void combo(JComboBox<?> c) {
+    c.setBackground(Color.WHITE);
+    c.setForeground(new Color(25, 30, 50));
+    c.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+    c.setOpaque(true);
+
+    c.setRenderer(new DefaultListCellRenderer() {
+        @Override
+        public Component getListCellRendererComponent(
+                JList<?> list, Object value, int index,
+                boolean isSelected, boolean cellHasFocus) {
+
+            super.getListCellRendererComponent(
+                list, value, index, isSelected, cellHasFocus);
+
+            setForeground(new Color(25, 30, 50));
+            setBackground(Color.WHITE);
+
+            if (isSelected) {
+                setBackground(new Color(225, 215, 255));
+                setForeground(new Color(25, 30, 50));
+            }
+
+            setOpaque(true);
+            return this;
+        }
+    });
+}
+
 
     public static JScrollPane scroll(Component c) {
         JScrollPane s = new JScrollPane(c);

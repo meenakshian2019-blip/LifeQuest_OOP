@@ -1,5 +1,6 @@
 lifequest\model\User.class
 lifequest\profile\ProfilePanel.class
+lifequest\ui\Style$1.class
 lifequest\auth\RegisterPanel.class
 lifequest\settings\SettingsPanel.class
 lifequest\analytics\AnalyticsPanel.class
